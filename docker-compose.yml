@@ -1,0 +1,64 @@
+services:
+  mongodb:
+    image: mongodb/mongodb-community-server
+    container_name: mongodb
+    restart: unless-stopped
+    environment:
+      - MONGODB_INITDB_ROOT_USERNAME=myuser
+      - MONGODB_INITDB_ROOT_PASSWORD=mypass
+    volumes:
+      - mongodb_data:/data/db
+    ports:
+      - 27017:27017
+    networks:
+      - fabric-network
+    healthcheck:
+      test: ['CMD', 'mongo', '--eval', "db.runCommand('ping')"]
+      interval: 60s
+      timeout: 30s
+      retries: 3
+      start_period: 20s
+
+  redis:
+    image: redis:7.4.2-alpine3.21
+    container_name: redis
+    restart: unless-stopped
+    ports:
+      - 6379:6379
+    volumes:
+      - redis_data:/data
+    networks:
+      - fabric-network
+    healthcheck:
+      test: ['CMD', 'redis-cli', 'ping']
+      interval: 60s
+      timeout: 30s
+      retries: 3
+      start_period: 10s
+
+  fabric-backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: fabric-backend
+    restart: unless-stopped
+    environment:
+      - MONGO_URI=mongodb://myuser:mypass@mongodb:27017
+      - REDIS_URL=redis://redis:6379
+    ports:
+      - 3000:3000
+    depends_on:
+      - mongodb
+      - redis
+    networks:
+      - fabric-network
+
+networks:
+  fabric-network:
+    driver: bridge
+
+volumes:
+  mongodb_data:
+    driver: local
+  redis_data:
+    driver: local

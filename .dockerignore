@@ -1,0 +1,19 @@
+.env*
+*.md
+*.log
+test/
+*.spec.*
+
+# Pipeline files
+.gitignore
+.git
+
+# Compiled output
+node_modules
+dist
+
+
+# Docker files
+docker-compose*.yml
+Dockerfile*
+.dockerignore
