@@ -121,32 +121,32 @@ $ npm run test:cov
 ## Requirements
 
 `/patients` Endpoint
-● POST request to /patients:
-○ Creates a new patient record. ✅
-○ Expects a JSON patient object without an id property as a body payload. ✅
-○ Adds the patient object to the collection and assigns a unique integer id. ✅
-○ Responds with the created patient object and a 201 status code. ✅
-● GET request to /patients:
-○ Returns a collection of all patient records. ✅
-○ Responds with an array of patient objects and a 200 status code. ✅
-● GET request to /patients/:id:
-○ Returns a patient record with the given id. ✅
-○ Responds with the patient object and a 200 status code if found. ✅
-○ Responds with a 404 status code if no patient is found. ✅
+- POST request to /patients:
+  - Creates a new patient record. ✅
+  - Expects a JSON patient object without an id property as a body payload. ✅
+  - Adds the patient object to the collection and assigns a unique integer id. ✅
+  - Responds with the created patient object and a 201 status code. ✅
+- GET request to /patients:
+  - Returns a collection of all patient records. ✅
+  - Responds with an array of patient objects and a 200 status code. ✅
+  - GET request to /patients/:id:
+  - Returns a patient record with the given id. ✅
+  - Responds with the patient object and a 200 status code if found. ✅
+  - Responds with a 404 status code if no patient is found. ✅
 
 `/appointments` Endpoint
-● GET request to /appointments:
-○ Returns a collection of all appointments. ✅
-○ Responds with an array of appointment objects and a 200 status code. ✅
-○ Optionally accepts query parameters patient_id and doctor. ✅
-● GET request to /appointments/:id:
-○ Returns an appointment with the given id. ✅
-○ Responds with the appointment object and a 200 status code if found. ✅
-○ Responds with a 404 status code if no appointment is found. ✅
-● POST request to /appointments
-○ Creates an event to process a file containing appointments. ✅
-○ Expect a file path parameter in the request body (can be a local file path). ✅
-○ Responds with a 200 status code once the event is successfully published to the broker. ✅
+- GET request to /appointments:
+  - Returns a collection of all appointments. ✅
+  - Responds with an array of appointment objects and a 200 status code. ✅
+  - Optionally accepts query parameters patient_id and doctor. ✅
+- GET request to /appointments/:id:
+  - Returns an appointment with the given id. ✅
+  - Responds with the appointment object and a 200 status code if found. ✅
+  - Responds with a 404 status code if no appointment is found. ✅
+- POST request to /appointments
+  - Creates an event to process a file containing appointments. ✅
+  - Expect a file path parameter in the request body (can be a local file path). ✅
+  - Responds with a 200 status code once the event is successfully published to the broker. ✅
 
 `Appointments Queue`
-○ Processes a CSV file and inserts appointments into the database. ✅
+- Processes a CSV file and inserts appointments into the database. ✅
