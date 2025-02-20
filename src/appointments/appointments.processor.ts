@@ -1,7 +1,7 @@
 import { Processor, WorkerHost } from '@nestjs/bullmq';
 import { Logger } from '@nestjs/common';
 import { Job } from 'bullmq';
-import * as fs from 'fs';
+import * as fs from 'fs/promises';
 import * as Papa from 'papaparse';
 import { plainToInstance } from 'class-transformer';
 import { validate } from 'class-validator';
@@ -29,7 +29,7 @@ export class AppointmentsProcessor extends WorkerHost {
 
           try {
             const filepath = job.data.filepath.replace('~', '');
-            const csvFile = fs.readFileSync(filepath, 'utf8');
+            const csvFile = await fs.readFile(filepath, 'utf8');
 
             const parsedCsv = Papa.parse(csvFile, { header: true });
             if (parsedCsv.errors.length > 0) {

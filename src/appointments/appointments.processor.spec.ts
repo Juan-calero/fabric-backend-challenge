@@ -10,8 +10,8 @@ jest.mock('./dto/create-appointments.dto', () => ({
   CreateAppointmentsDto: 'mockCreateAppointmentsDto',
 }));
 
-jest.mock('fs', () => ({
-  readFileSync: jest.fn(() => 'csvFile'),
+jest.mock('fs/promises', () => ({
+  readFile: jest.fn(() => 'csvFile'),
 }));
 
 jest.mock('papaparse', () => ({
